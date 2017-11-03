@@ -44,19 +44,19 @@ class Aligner(datasetName: String, inputFile: String) {
       val a = s.head
       val b = (s - a).head
       if (res.synonym(a, b)) {
-        System.err.println("synonym: " + a + " = " + b)
+//        System.err.println("synonym: " + a + " = " + b)
         ie.subsume(a, b)
         ie.subsume(b, a)
       } else if (Set(a.mypos, b.mypos).subsetOf(Set("J", "R")) && res.antonym(a, b)) {
-        System.err.println("antonym: " + a + " <> " + b)
+//        System.err.println("antonym: " + a + " <> " + b)
         ie.disjoint(a, b)
       } else {
         if (res.hyponym(a, b) && !b.isNamedEntity) {
-          System.err.println("hyponym: " + a + " -> " + b)
+//          System.err.println("hyponym: " + a + " -> " + b)
           ie.subsume(a, b)
         }
         if (res.hyponym(b, a) && !a.isNamedEntity) {
-          System.err.println("hyponym: " + b + " -> " + a)
+//          System.err.println("hyponym: " + b + " -> " + a)
           ie.subsume(b, a)
         }
       }
@@ -152,7 +152,7 @@ class Aligner(datasetName: String, inputFile: String) {
           .map(t => (t._1, t._2))
         allTrans ++= trans
 
-        System.err.println("ALIGNED: " + necessary.size + " / ACCEPTED: " + trans.size)
+//        System.err.println("ALIGNED: " + necessary.size + " / ACCEPTED: " + trans.size)
 
         for ((sub, sup, scr) <- necessary) {
 //          System.err.println(" score: " + scr)
