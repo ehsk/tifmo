@@ -15,7 +15,7 @@ package res.en {
 	
 	object EnWordNet {
 		
-		private[this] val dir = EnWordNet.getClass.getClassLoader.getResource("en/dict").toURI
+		private[this] val dir = "resources/en/dict"
 		
 		private[this] val dict = new Dictionary(new java.io.File(dir))
 		dict.open()

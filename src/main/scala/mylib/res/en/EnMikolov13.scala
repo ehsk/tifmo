@@ -9,7 +9,7 @@ package res.en {
 	
 	object EnMikolov13 {
 		
-		private[this] val dir = EnMikolov13.getClass.getClassLoader.getResource("en/WordVectors/Mikolov13.cdb").getFile
+		private[this] val dir = "resources/en/WordVectors/Mikolov13.cdb"
 		
 		private[this] val cdb = new Cdb(dir)
 		
