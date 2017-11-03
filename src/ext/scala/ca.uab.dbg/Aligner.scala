@@ -180,4 +180,6 @@ object Aligner extends App {
     aligner.find()
   }
 
+  sys.exit(0)
+
 }

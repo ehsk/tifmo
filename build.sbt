@@ -2,6 +2,9 @@ name := "tifmo"
 version := "1.0"
 scalaVersion := "2.12.3"
 
+// To address sbt.TrapExitSecurityException during running in console
+fork in run := true
+
 unmanagedSourceDirectories in Compile += baseDirectory.value / "src" / "ext" / "scala"
 
 unmanagedJars in Compile ++=
