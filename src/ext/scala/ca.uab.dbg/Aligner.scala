@@ -102,12 +102,12 @@ class Aligner(datasetName: String, inputFile: String) {
 
       if (rec.isEmpty) {
 
-        System.err.println("Proven.")
+//        System.err.println("Proven.")
 //        println(id + "," + task + "," + gold_label + ",1.0")
 
       } else {
 
-        System.err.println("Proven with on-the-fly knowledge.")
+//        System.err.println("Proven with on-the-fly knowledge.")
 //        println(id + "," + task + "," + gold_label + "," + rec.last._2)
 
         var necessary = Nil: List[(String, String, Double)]
@@ -145,7 +145,7 @@ class Aligner(datasetName: String, inputFile: String) {
 
         loop()
 
-        System.err.println("ON THE FLY:")
+//        System.err.println("ON THE FLY:")
 
         val trans = necessary
           .filter(t => t._1 != t._2 && !t._1.contains(t._2) && !t._2.contains(t._1))
@@ -156,10 +156,11 @@ class Aligner(datasetName: String, inputFile: String) {
 
         for ((sub, sup, scr) <- necessary) {
 //          System.err.println(" score: " + scr)
-          val suffix = if (sub == sup || sub.contains(sup) || sup.contains(sub)) " (DISCARDED)" else ""
 
-          System.err.println("  subPath: " + sub + suffix)
-          System.err.println("  supPath: " + sup + suffix + "\n")
+          if (sub == sup || sub.contains(sup) || sup.contains(sub)) {
+            System.err.println("  subPath: " + sub)
+            System.err.println("  supPath: " + sup + "\n")
+          }
         }
 
         System.err.println("-------------------")
