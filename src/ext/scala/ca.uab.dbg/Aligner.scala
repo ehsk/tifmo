@@ -147,20 +147,26 @@ class Aligner(datasetName: String, inputFile: String) {
 
 //        System.err.println("ON THE FLY:")
 
+        val wordPattern = "\\((\\w+)_\\w\\)".r
+
         val trans = necessary
-          .filter(t => t._1 != t._2 && !t._1.contains(t._2) && !t._2.contains(t._1))
+          .filter(t => {
+            val sub = t._1
+            val sup = t._2
+
+            val bw = (for (b <- wordPattern.findAllMatchIn(sub)) yield b.group(1)).mkString(",")
+            val pw = (for (p <- wordPattern.findAllMatchIn(sup)) yield p.group(1)).mkString(",")
+
+            sub != sup && !sub.contains(sup) && !sup.contains(sub) && !bw.contains(pw) && !pw.contains(bw)
+          })
           .map(t => (t._1, t._2))
         allTrans ++= trans
 
 //        System.err.println("ALIGNED: " + necessary.size + " / ACCEPTED: " + trans.size)
 
-        for ((sub, sup, scr) <- necessary) {
+        for ((sub, sup) <- trans) {
 //          System.err.println(" score: " + scr)
-
-          if (sub == sup || sub.contains(sup) || sup.contains(sub)) {
-            System.err.println("  subPath: " + sub)
-            System.err.println("  supPath: " + sup + "\n")
-          }
+          println("  subPath: " + sub + " - supPath: " + sup + "\n")
         }
 
         System.err.println("-------------------")
