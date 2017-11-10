@@ -166,10 +166,11 @@ class Aligner(datasetName: String, inputFile: String) {
 
         for ((sub, sup) <- trans) {
 //          System.err.println(" score: " + scr)
-          println("  subPath: " + sub + " - supPath: " + sup + "\n")
+          println("  " + sub + "  ==  " + sup + "\n")
         }
 
-        System.err.println("-------------------")
+        if (trans.nonEmpty)
+          println("-------------------")
 
       }
     }
